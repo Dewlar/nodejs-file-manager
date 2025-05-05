@@ -4,16 +4,18 @@ function parseArgs() {
 
   if (cliArg) return cliArg.split('=')[1];
   if (envArg) return envArg;
-  return 'Anonymous';
+  return '';
 }
 
-const username = parseArgs();
+function getUserName() {
+  return parseArgs() || 'Anonymous';
+}
 
 export function printWelcomeMessage() {
-  console.log(`Welcome to the File Manager, ${username}!`);
+  console.log(`Welcome to the File Manager, ${getUserName()}!`);
 }
 
 export function exitHandler() {
-  console.log(`\nThank you for using File Manager, ${username}, goodbye!`);
+  console.log(`\nThank you for using File Manager, ${getUserName()}, goodbye!`);
   process.exit(0);
 }
