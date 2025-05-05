@@ -5,7 +5,7 @@ import {getCurrentDirectory} from "../../utils/directory.js";
 export async function add(fileName) {
   try {
     const fullPath = path.resolve(getCurrentDirectory(), fileName);
-    await writeFile(fullPath, '', { flag: 'wx' }); // 'wx' = fail if exists
+    await writeFile(fullPath, '', { flag: 'wx' }); // wx = fail if exists
   } catch {
     console.log('Operation failed');
   }

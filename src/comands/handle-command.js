@@ -5,6 +5,9 @@ import {ls} from "./navigation/ls.js";
 import {cat} from "./file-system/cat.js";
 import {add} from "./file-system/add.js";
 import {rn} from "./file-system/rn.js";
+import {cp} from "./file-system/cp.js";
+import {mv} from "./file-system/mv.js";
+import {rm} from "./file-system/rm.js";
 
 export async function handleCommand(input) {
   const [command, ...args] = input.trim().split(/\s+/);
@@ -28,6 +31,15 @@ export async function handleCommand(input) {
         break;
       case 'rn':
         await rn(args[0], args[1]);
+        break;
+      case 'cp':
+        await cp(args[0], args[1]);
+        break;
+      case 'mv':
+        await mv(args[0], args[1]);
+        break;
+      case 'rm':
+        await rm(args[0]);
         break;
       default:
         console.log('Invalid input');
