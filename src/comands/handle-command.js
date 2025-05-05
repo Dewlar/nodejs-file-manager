@@ -62,6 +62,6 @@ export async function handleCommand(input) {
   } catch (e) {
     console.log('Operation failed');
   } finally {
-    printCWD();
+    // printCWD();
   }
 }
