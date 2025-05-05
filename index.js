@@ -1,11 +1,7 @@
-import { homedir} from 'os';
 import readline from 'readline';
-import * as os from "node:os";
-console.log('ARGV:', process.argv);
+import {getCurrentDirectory, printCWD, setInitialDirectory} from "./src/utils/directory.js";
+
 function parseArgs() {
-  // const args = process.argv.slice(2);
-  // const usernameArg = args.find((arg) => arg.startsWith('--username='));
-  // return usernameArg ? usernameArg.split('=')[1] : 'Anonymous';
   const cliArg = process.argv.find(arg => arg.startsWith('--username='));
   const envArg = process.env.npm_config_username;
   if (cliArg) return cliArg.split('=')[1];
@@ -21,10 +17,6 @@ const rl = readline.createInterface({
   prompt: '> ',
 });
 
-function printCWD() {
-  console.log(`You are currently in ${process.cwd()}`);
-}
-
 function exitHandler(username) {
   console.log(`\nThank you for using File Manager, ${username}, goodbye!`);
   process.exit(0);
@@ -33,17 +25,11 @@ function exitHandler(username) {
 function handleCommand(input, currentDir) {
 
 }
-function setInitialDirectory() {
-  const homeDir = os.homedir();
-  process.chdir(homeDir);
-  printCWD();
-}
 
-let currentDir = homedir();
 setInitialDirectory();
 
 console.log(`Welcome to the File Manager, ${username}!`);
-printCWD(currentDir);
+printCWD(getCurrentDirectory());
 rl.prompt();
 
 rl.on('line', async (input) => {
@@ -52,12 +38,18 @@ rl.on('line', async (input) => {
     exitHandler(username);
   } else {
     try {
-      currentDir = await handleCommand(trimmed, currentDir);
+      await handleCommand(trimmed);
+      rl.prompt();
     } catch {
       console.log('Operation failed');
     } finally {
-      printCWD(currentDir);
+      printCWD(getCurrentDirectory());
       rl.prompt();
     }
   }
 });
+
+
+rl
+.on('close', () => exitHandler(username))
+.on('SIGINT', () => exitHandler(username));
