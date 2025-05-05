@@ -1,7 +1,7 @@
 import readline from 'readline';
 import {getCurrentDirectory, printCWD, setInitialDirectory} from "./src/utils/directory.js";
 import {exitHandler, printWelcomeMessage} from "./src/utils/user.js";
-import {handleCommand} from "./src/comands/input-command.js";
+import {handleCommand} from "./src/comands/handle-command.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
