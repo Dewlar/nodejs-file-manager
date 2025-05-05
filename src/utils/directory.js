@@ -4,10 +4,11 @@ import {homedir} from "os";
 export function setInitialDirectory() {
   const homeDir = os.homedir();
   process.chdir(homeDir);
+  // process.chdir(homedir());
 }
 
 export function getCurrentDirectory() {
-  return homedir();
+  return process.cwd();
 }
 
 export function printCWD(directory) {
