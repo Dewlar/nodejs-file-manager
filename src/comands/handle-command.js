@@ -8,6 +8,7 @@ import {rn} from "./file-system/rn.js";
 import {cp} from "./file-system/cp.js";
 import {mv} from "./file-system/mv.js";
 import {rm} from "./file-system/rm.js";
+import {execOsCommand} from "./os/os.js";
 
 export async function handleCommand(input) {
   const [command, ...args] = input.trim().split(/\s+/);
@@ -40,6 +41,9 @@ export async function handleCommand(input) {
         break;
       case 'rm':
         await rm(args[0]);
+        break;
+      case 'os':
+        await execOsCommand(args[0]);
         break;
       default:
         console.log('Invalid input');
