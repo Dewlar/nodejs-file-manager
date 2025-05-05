@@ -10,6 +10,7 @@ import {mv} from "./file-system/mv.js";
 import {rm} from "./file-system/rm.js";
 import {execOsCommand} from "./os/os.js";
 import {hash} from "./hash/hash.js";
+import {compress, decompress} from "./archivation/brotli.js";
 
 export async function handleCommand(input) {
   const [command, ...args] = input.trim().split(/\s+/);
@@ -48,6 +49,12 @@ export async function handleCommand(input) {
         break;
       case 'hash':
         await hash(args[0]);
+        break;
+      case 'compress':
+        await compress(args[0], args[1]);
+        break;
+      case 'decompress':
+        await decompress(args[0], args[1]);
         break;
       default:
         console.log('Invalid input');
