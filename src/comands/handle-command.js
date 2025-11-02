@@ -11,6 +11,7 @@ import {rm} from "./file-system/rm.js";
 import {execOsCommand} from "./os/os.js";
 import {hash} from "./hash/hash.js";
 import {compress, decompress} from "./archivation/brotli.js";
+import {createDirectory} from "./file-system/mkdir.js";
 
 export async function handleCommand(input) {
   const [command, ...args] = input.trim().split(/\s+/);
@@ -28,6 +29,9 @@ export async function handleCommand(input) {
         break;
       case 'cat':
         await cat(args[0]);
+        break;
+      case 'mkdir':
+        await createDirectory(args[0]);
         break;
       case 'add':
         await add(args[0]);
